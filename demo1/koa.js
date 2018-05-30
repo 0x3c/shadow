@@ -22,7 +22,7 @@ xx("dasfa");
 // const app = new Koa();
 // const fotch = require("./util/fetchFile");
 
-// const url = `http://hr.goldmantis.com/platform/system/sysFile/fileByJobNumber.jtl?jobNumber = N0042937`;
+// const url = `http://hr.goldmantis.com/platform/system/sysFile/fileByJobNumber.jtl?jobNumber=N0042937`;
 
 // console.log(fotch(url));
 

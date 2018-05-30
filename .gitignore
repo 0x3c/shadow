@@ -1,5 +1,7 @@
 # dependencies
 /node_modules
 
+/demo1/config/api.js
+
 yarn-debug.log*
 yarn-error.log*
