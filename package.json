@@ -3,6 +3,8 @@
     "babel-register": "^6.26.0",
     "koa": "^2.5.1",
     "koa-route": "^3.2.0",
+    "koa2-cors": "^2.0.5",
+    "node-fetch": "^2.1.2",
     "whatwg-fetch": "^2.0.4"
   }
 }
