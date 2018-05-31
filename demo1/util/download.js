@@ -1,6 +1,5 @@
 const fs = require("fs");
 const fotch = require("./fetchFile");
-const FileReader = require("filereader");
 const log = require("./log");
 
 const open = async path => {
@@ -14,14 +13,6 @@ const open = async path => {
   });
 };
 
-const readBlob = blob => {
-  const fr = new FileReader();
-  fr.addEventListener("loadend", e => {
-    log(e);
-  });
-  //   log(blob.type);
-  fr.readAsBinaryString(blob);
-};
 const write = async (path, data) => {
   return new Promise((resolve, reject) => {
     const buffer = Buffer.alloc(data.size);
