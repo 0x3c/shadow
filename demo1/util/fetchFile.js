@@ -1,16 +1,22 @@
 const fetch = require("node-fetch");
 const log = require("./log");
+const getSuffix = require("./suffix");
 
-//   .then(res => res.body)
-//   .then(body => body.getReader())
-//   .then(reader => log(reader));
-// 测试fetch
-const fotch = async url => {
-  const res = await fetch(url);
-  const filename = res.headers.get("content-disposition");
+const fotch = async (url, params) => {
+  const uri = new URL(url);
+  const search = new URLSearchParams(params);
+  uri.search = search;
+  const res = await fetch(uri);
+
+  // get response's buffer
   const blob = await res.blob();
-  log(`downloaded ${filename}`);
-  //   log(blob);
-  return { blob, filename };
+  const symBuffer = Object.getOwnPropertySymbols(blob)[1]; // buffer key
+  const buffer = blob[symBuffer];
+
+  //file type in blob type(or response.headers.content-type)
+  const suffix = getSuffix(blob.type);
+
+  const filename = `${params.jobNumber}.${suffix}`;
+  return { buffer, filename };
 };
 module.exports = fotch;
