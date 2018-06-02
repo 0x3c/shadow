@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 const fotch = require("./fetchFile");
 const log = require("./log");
 
@@ -29,10 +30,11 @@ const download = async (url, params) => {
     const { buffer, filename } = await fotch(url, {
       ...params
     });
-
     log(`down ${filename} succeed.`);
-    await write(filename, buffer);
-    log(`write ${filename} succeed.`);
+
+    const base = path.resolve(__dirname, `../data/${filename}`);
+    await write(base, buffer);
+    log(`write ${base} succeed.`);
     return { success: params.jobNumber };
   } catch (err) {
     // log(err);
