@@ -13,26 +13,31 @@ const open = async path => {
   });
 };
 
-const write = async (path, data) => {
+const write = async (path, buffer) => {
   return new Promise((resolve, reject) => {
-    const buffer = Buffer.alloc(data.size);
-    buffer.writeInt8(data);
-    // const buffer = Buffer.from(data, "utf8");
-    log(buffer);
     fs.writeFile(path, buffer, err => {
       if (err) {
         reject("写入失败");
       }
-      log(`创建 ${path}`);
-      log(data.size / 1024 + "B");
       resolve();
     });
   });
 };
 
-const download = async path => {
-  const { blob, filename } = await fotch(url);
-  //   readBlob(blob);
-  await write(filename, blob);
+const download = async (url, params) => {
+  try {
+    const { buffer, filename } = await fotch(url, {
+      ...params
+    });
+
+    log(`down ${filename} succeed.`);
+    await write(filename, buffer);
+    log(`write ${filename} succeed.`);
+    return { success: params.jobNumber };
+  } catch (err) {
+    // log(err);
+    return { failed: params.jobNumber };
+  }
 };
-download();
+
+module.exports = download;

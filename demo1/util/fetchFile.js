@@ -15,7 +15,6 @@ const fotch = async (url, params) => {
 
   //file type in blob type(or response.headers.content-type)
   const suffix = getSuffix(blob.type);
-
   const filename = `${params.jobNumber}.${suffix}`;
   return { buffer, filename };
 };
